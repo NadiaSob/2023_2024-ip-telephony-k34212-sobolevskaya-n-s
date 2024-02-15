@@ -26,4 +26,12 @@ Date of finished:
 
 ### Часть 1
 
-1. 
+1. Соберем схему соединения
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/9b1d913d-4612-489b-b2aa-d403e05e94fe)
+
+2. Присвоим компьютерам статические IP-адреса 192.168.20.1 - 192.168.20.7 с маской 255.255.255.0
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/f98d4e83-b635-487b-9a59-d1affa4ced75)
+
+3. 
