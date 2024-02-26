@@ -98,5 +98,10 @@ CMERouter(config-ephone-dn)#exit
 ![Снимок экрана 2024-02-26 151859](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/722d74b1-c612-4410-b4bd-5ba21e27a29e)
 
   
+### Часть 2
+
+1. Соберем схему соединения:
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/62d07bb6-ca6b-4e51-a788-9a698718efcc)
 
 
