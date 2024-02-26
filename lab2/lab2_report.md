@@ -19,7 +19,7 @@ Date of finished:
 # Отчет по лабораторной работе №2: "Конфигурация voip в среде Сisco packet tracer"
 
 ## Цель работы
-Иизучить построение сети IP-телефонии с помощью маршрутизатора Cisco 2811, коммутатора Cisco catalyst 3560 и IP телефонов Cisco 7960.
+Изучить построение сети IP-телефонии с помощью маршрутизатора Cisco 2811, коммутатора Cisco catalyst 3560 и IP телефонов Cisco 7960.
 
 ## Ход работы
 
@@ -104,4 +104,101 @@ CMERouter(config-ephone-dn)#exit
 
 ![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/62d07bb6-ca6b-4e51-a788-9a698718efcc)
 
+2. Создадим VLAN порты на коммутаторе для взаимодействия коммутатора с маршрутизатором.
+```
+Switch(config)#vlan 10
+Switch(config-vlan)#name data
+Switch(config-vlan)#vlan 20
+Switch(config-vlan)#name voice
+```
 
+3. На коммутаторе настроим интерфейсы
+```
+Switch(config)#int fa0/1
+Switch(config-if)# switchport trunk native vlan 30
+Switch(config-if)# switchport trunk encapsulation dot1q
+Switch(config-if)# switchport mode trunk
+Switch(config-if)# switchport voice vlan 1
+Switch(config-if)#
+Switch(config-if)#int fa0/2
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport voice vlan 20
+Switch(config-if)#
+Switch(config-if)#int fa0/3
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport voice vlan 20
+Switch(config-if)#
+Switch(config-if)#int fa0/4
+Switch(config-if)# switchport access vlan 10
+Switch(config-if)# switchport mode access
+Switch(config-if)# switchport voice vlan 20
+```
+
+4. Зададим маршрут по умолчанию командой ip default-gateway:
+```
+ip default-gateway 192.168.30.1
+```
+
+5. На маршрутизаторе поднимаем подынтерфейсы для vlan 10 и vlan 20
+```
+Router(config-subif)#interface FastEthernet0/0
+Router(config-subif)#no shutdown
+Router(config-subif)#interface FastEthernet0/0.10
+Router(config-subif)#encapsulation dot1Q 10
+Router(config-subif)#ip address 192.168.10.1 255.255.255.0
+Router(config-subif)#interface FastEthernet0/0.20
+Router(config-subif)#encapsulation dot1Q 20
+Router(config-subif)#ip address 192.168.20.1 255.255.255.0
+```
+
+6. На маршрутизаторе настроим DHCP для PC и телефонов:
+```
+Router(config)#ip dhcp pool data
+Router(dhcp-config)#network 192.168.10.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.10.1
+Router(dhcp-config)#ip dhcp pool voice
+Router(dhcp-config)#network 192.168.20.0 255.255.255.0
+Router(dhcp-config)#default-router 192.168.20.1
+Router(dhcp-config)#option 150 ip 192.168.20.1
+```
+
+7. На PC включаем раздачу адресов по DHCP:
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/e730119d-2a00-4591-86c1-346218252c5e)
+
+8. Настроим услуги телефонии Cisco CallManager Express на маршрутизаторе. Присвоим телефонам номера.
+```
+Router(config)#telephony-service
+Router(config-telephony)#max-dn 5
+Router(config-telephony)#max-ephones 5
+Router(config-telephony)#ip source-address 192.168.20.1 port 2000
+Router(config-telephony)#auto assign 1 to 5
+```
+
+```
+CMERouter(config)#ephone-dn 1
+CMERouter(config-ephone-dn)#number 111
+CMERouter(config-ephone-dn)#exit
+CMERouter(config)#ephone-dn 2
+CMERouter(config-ephone-dn)#number 222
+CMERouter(config-ephone-dn)#exit
+CMERouter(config)#ephone-dn 3
+CMERouter(config-ephone-dn)#number 333
+```
+
+9. Проверка связанности:
+Пропингуем компьютеры:
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/04c4a15d-d5d3-4e13-9df7-f0484555474d)
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/c320ab3e-24c8-4f13-af06-565b995dbc9f)
+
+Проверим звонки между телефонами:
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/03fffe8e-ca2b-4ded-a4bb-0222d6dbac35)
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/77fa0f0a-0a42-4adf-9bad-37a27134d72f)
+
+## Вывод
+В результате выполнения лабораторной работы удалось изучить построение сети IP-телефонии с помощью маршрутизатора Cisco 2811, коммутатора Cisco catalyst 3560 и IP телефонов Cisco 7960.
