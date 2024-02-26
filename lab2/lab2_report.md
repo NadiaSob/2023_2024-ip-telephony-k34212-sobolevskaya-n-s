@@ -69,7 +69,34 @@ CMERouter(config-telephony)#ip source-address 192.168.10.1 port 2000
 CMERouter(config-telephony)#auto assign 1 to 5
 ```
 
+7. Теперь на коммутаторе создаем VLAN порты для взаимодействия коммутатора с маршрутизатором и подключаем IP телефоны. Порты переводим в режим acess и прокидываем voice канал:
+```
+Switch(config)#interface range FastEthernet 0/1-4
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport voice vlan 1
+```
 
+8. Настраиваем телефоны. На коммутаторе присваиваем каждому номер:
+```
+CMERouter(config)#ephone-dn 1
+CMERouter(config-ephone-dn)#number 101
+CMERouter(config-ephone-dn)#exit
+CMERouter(config)#ephone-dn 2
+CMERouter(config-ephone-dn)#number 102
+CMERouter(config-ephone-dn)#exit
+CMERouter(config)#ephone-dn 3
+CMERouter(config-ephone-dn)#number 103
+CMERouter(config-ephone-dn)#exit
+```
 
+9. Теперь видим, что каждому телефону был присвоен ip адрес на vlan 1 и номер. Проверим звонки между телефонами.
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/a5d33dae-494a-48a1-bc54-31da5c684018)
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/30e62273-3c0c-470f-81cf-43a6130f56bb)
+
+![Снимок экрана 2024-02-26 151859](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/722d74b1-c612-4410-b4bd-5ba21e27a29e)
+
+  
 
 
