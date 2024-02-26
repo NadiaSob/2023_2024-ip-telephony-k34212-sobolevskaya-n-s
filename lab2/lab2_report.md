@@ -45,6 +45,30 @@ CMERouter(config-line)#password admin
 CMERouter(config-line)#login
 ```
 
+4. Настроим интерфейс fa0/0 на маршрутизаторе. Поднимем его и присвоим ip адрес:
+```
+CMERouter(config)#int fa0/0
+CMERouter(config-if)#ip address 192.168.0.1 255.255.255.0
+CMERouter(config-if)#no shutdown
+```
+
+5. На маршрутизаторе настроим DHCP сервера для передачи голоса и данных:
+```
+CMERouter(config)#ip dhcp pool phones
+CMERouter(dhcp-config)#network 192.168.1.0 255.255.255.0
+CMERouter(dhcp-config)#default-router 192.168.1.1
+CMERouter(dhcp-config)#option 150 ip 192.168.1.1
+```
+
+6. На маршрутизаторе настроим услуги телефонии Cisco CallManager Express с помощью команд:
+```
+CMERouter(config)#telephony-service
+CMERouter(config-telephony)#max-dn 5
+CMERouter(config-telephony)#max-ephones 5
+CMERouter(config-telephony)#ip source-address 192.168.10.1 port 2000
+CMERouter(config-telephony)#auto assign 1 to 5
+```
+
 
 
 
