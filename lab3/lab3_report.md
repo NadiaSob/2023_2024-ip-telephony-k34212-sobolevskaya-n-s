@@ -23,15 +23,28 @@ Date of finished:
 
 ## Ход работы
 
-### Часть 1
+Работу будем выполнять на Ubuntu 22.04.3
 
-1. 
+1. Установим Asterisk
 
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/2cd817fb-4aa1-4fc5-be45-3ee4c3f12eb2)
+
+2. Настроим SIP каналы. Для этого открываем файл /etc/asterisk/sip.conf, добавляем информацию о телефонах 1000 и 1001:
+
+```
+[1000]
+type=friend
+host=dynamic
+secret=1000
+context=ext_1000
+
+[1001]
+type=friend
+host=dynamic
+secret=1001
+context=ext_1001
+```
  
-### Часть 2
-
-1. 
-
 
 
 ## Вывод
