@@ -63,11 +63,32 @@ exten => _XXXX,1,Dial(SIP/${EXTEN})
 
 ![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/20a161ec-444d-4d3a-98b6-48e5235ab190)
 
-5. В качестве soft-телефона устанавливаем Zoiper5. Для этого скачиваем архив и запускаем программу. При входе вводим данные аккаунта: логин - 1000, пароль - 1000
+5. В качестве soft-телефона устанавливаем Zoiper5. Для этого скачиваем архив, распаковываем и запускаем программу. При входе вводим данные аккаунта: логин - 1000, пароль - 1000
 
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/83cf20ca-b22d-417b-a190-c85e7c61b847)
 
-6. а
+Указываем в качестве хоста локалхост:
 
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/f7fbfc25-f3f7-4b68-b99e-e92ca73309eb)
+
+6. Проверим подключение с помощью команд
+
+```
+sudo asterisk -r
+sip show peers
+```
+
+![Скриншот 04-03-2024 192304 1](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/064c6667-b197-4c49-a785-1b4fc4010fea)
+
+7. Установим и настроим MicroSIP, предварительно установив wine:
+
+![Скриншот 04-03-2024 192305](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/d3c963e9-5054-4fbb-ba13-b16e6cd34e0f)
+
+8. Проверим соединение, произведем звонок с телефона 1001 на 1000:
+
+![Скриншот 04-03-2024 192306](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/564e1482-b522-401a-9917-b698852985ec)
+
+Соединение успешно.
 
 ## Вывод
 В результате выполнения лабораторной работы удалось изучить программный комплекс Asterisk, настроить Asterisk для локальных звонков.
