@@ -78,7 +78,7 @@ sudo asterisk -r
 sip show peers
 ```
 
-![Скриншот 04-03-2024 192304 1](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/064c6667-b197-4c49-a785-1b4fc4010fea)
+![Скриншот 04-03-2024 192304 1](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/d0a83d95-8c43-47cf-ae1c-a7e0607a18e6)
 
 7. Установим и настроим MicroSIP, предварительно установив wine:
 
