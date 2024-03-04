@@ -44,7 +44,29 @@ host=dynamic
 secret=1001
 context=ext_1001
 ```
- 
+
+Затем открываем файл /etc/asterisk/extensions.conf, добавляем информацию:
+
+```
+[ext_1000]
+exten => _XXXX,1,Dial(SIP/${EXTEN})
+
+[ext_1001]
+exten => _XXXX,1,Dial(SIP/${EXTEN})
+```
+
+3. Перезапускаем Asterisk:
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/9dd38549-2326-4876-9ade-b43b059e1835)
+
+4. Проверим статус:
+
+![image](https://github.com/NadiaSob/2023_2024-ip-telephony-k34212-sobolevskaya-n-s/assets/43678322/20a161ec-444d-4d3a-98b6-48e5235ab190)
+
+5. В качестве soft-телефона устанавливаем Zoiper5. Для этого скачиваем архив и запускаем программу. При входе вводим данные аккаунта: логин - 1000, пароль - 1000
+
+
+6. а
 
 
 ## Вывод
